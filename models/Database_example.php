@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Class to connect to the data base
  */
