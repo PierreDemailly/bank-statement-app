@@ -1,7 +1,8 @@
 <?php
+$account_manager = new AccountManager();
+
 if(isset($_POST['new']))
 {
-  $account_manager = new AccountManager();
 
   if(in_array($_POST['name'], Account::TYPE_LIST))
   {
@@ -11,5 +12,7 @@ if(isset($_POST['new']))
     }
   }
 }
+
+$accounts = $account_manager->getAccount();
 
 include "./views/indexView.php";

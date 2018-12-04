@@ -52,17 +52,17 @@ class AccountManager
     {
         $stmt = $this->database->prepare('SELECT id, name, balance FROM accounts WHERE id = :id');
         $stmt->bindValue('id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        foreach($stmt->fetchAll() as $account)
-        {
-          $accounts[] = new Account($account);
-        }
-        return $accounts;
+        $stmt->execute(PDO::FETCH_ASSOC);
+        return new Account($stmt->fetch());
     }
     else 
     {
       $stmt = $this->database->query('SELECT id, name, balance FROM accounts');
-      return $stmt->fetchAll();
+      foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $account)
+      {
+        $accounts[] = new Account($account);
+      }
+      return $accounts;
     }
   }
 
