@@ -1,5 +1,5 @@
 <?php
-spl_autoload_register(function () 
+spl_autoload_register(function ($classname) 
 {
 	if (file_exists('./models/' . $classname . '.php'))
 	{
