@@ -10,9 +10,9 @@
         <link rel="apple-touch-icon" href="icon.png">
 		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 		<!-- Place favicon.ico in the root directory -->
-		<link rel="icon" href="../favicon.ico">
+		<link rel="icon" href="./favicon.ico">
 
-        <link rel="stylesheet" href="../assets/css/main.css">
+        <link rel="stylesheet" href="./assets/css/main.css">
     </head>
     <body>
         <!--[if lte IE 9]>
