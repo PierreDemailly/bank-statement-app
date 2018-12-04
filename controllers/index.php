@@ -23,6 +23,12 @@ if(isset($_POST['debit']))
   $account_manager->deptAccount($_POST['balance'], $_POST['id']);
 }
 
+if(isset($_POST['transfer']))
+{
+  $account_manager->deptAccount($_POST['balance'], $_POST['idDebit']);
+  $account_manager->creditAccount($_POST['balance'], $_POST['idPayment']);
+}
+
 $accounts = $account_manager->getAccount();
 
 include "./views/indexView.php";
