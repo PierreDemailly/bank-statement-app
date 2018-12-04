@@ -67,6 +67,34 @@ class AccountManager
   }
 
   /**
+   * Credit an account
+   * @param int $balance
+   * @param int $id
+   * @return void
+   */
+  public function creditAccount($balance, $id)
+  {
+    $stmt = $this->database->prepare('UPDATE accounts SET balance = balance + :balance WHERE id = :id');
+    $stmt->bindValue('balance', $balance, PDO::PARAM_INT);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+  }
+
+  /**
+   * Debt an account
+   * @param int $balance
+   * @param int $id
+   * @return void
+   */
+  public function deptAccount($balance, $id)
+  {
+    $stmt = $this->database->prepare('UPDATE accounts SET balance = balance - :balance WHERE id = :id');
+    $stmt->bindValue('balance', $balance, PDO::PARAM_INT);
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+  }
+
+  /**
    * Get the value of database
    * @return PDO
    */ 

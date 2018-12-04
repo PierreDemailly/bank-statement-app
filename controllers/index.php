@@ -13,6 +13,16 @@ if(isset($_POST['new']))
   }
 }
 
+if(isset($_POST['payment']))
+{
+  $account_manager->creditAccount($_POST['balance'], $_POST['id']);
+}
+
+if(isset($_POST['debit']))
+{
+  $account_manager->deptAccount($_POST['balance'], $_POST['id']);
+}
+
 $accounts = $account_manager->getAccount();
 
 include "./views/indexView.php";
