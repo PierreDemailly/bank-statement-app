@@ -4,8 +4,10 @@ declare(strict_types = 1);
 /**
  * Class representing a bank account
  */
-class Account
+class Account extends Entity
 {
+  const TYPE_LIST = ['PEL', 'Compte courant', 'Livret A', 'Compte joint'];
+
   private $id;
   private $name;
   private $balance;
