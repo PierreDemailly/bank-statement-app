@@ -29,7 +29,7 @@ include('includes/header.php');
 
 	<!-- Pour chaque compte enregistré en base de données, il faudra générer le code ci-dessous -->
 
-	<?php foreach($accounts as $account): ?>
+	<?php if($accounts): foreach($accounts as $account): ?>
 
 		<div class="card-container">
 
@@ -70,7 +70,7 @@ include('includes/header.php');
 
 					<!-- Formulaire pour suppression -->
 			 		<form class="delete" action="index.php" method="post">
-				 		<input type="hidden" name="id" value="<?php // Afficher ici l'id du compte ?>"  required>
+				 		<input type="hidden" name="id" value="<?= $account->getId() ?>"  required>
 				 		<input type="submit" name="delete" value="Supprimer le compte">
 			 		</form>
 
@@ -78,7 +78,7 @@ include('includes/header.php');
 			</div>
 		</div>
 
-	<?php endforeach; ?>
+	<?php endforeach; endif; ?>
 
 	</div>
 

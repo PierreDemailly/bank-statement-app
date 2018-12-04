@@ -62,7 +62,7 @@ class AccountManager
       {
         $accounts[] = new Account($account);
       }
-      return $accounts;
+      return $accounts ?? null;
     }
   }
 
@@ -92,6 +92,11 @@ class AccountManager
     $stmt->bindValue('balance', $balance, PDO::PARAM_INT);
     $stmt->bindValue('id', $id, PDO::PARAM_INT);
     $stmt->execute();
+  }
+
+  public function deleteAccount($id)
+  {
+    $stmt = $this->database->query('DELETE FROM accounts WHERE id = '. $id);
   }
 
   /**

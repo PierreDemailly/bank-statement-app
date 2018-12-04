@@ -29,6 +29,11 @@ if(isset($_POST['transfer']))
   $account_manager->creditAccount($_POST['balance'], $_POST['idPayment']);
 }
 
+if(isset($_POST['delete']))
+{
+  $account_manager->deleteAccount($_POST['id']);
+}
+
 $accounts = $account_manager->getAccount();
 
 include "./views/indexView.php";
