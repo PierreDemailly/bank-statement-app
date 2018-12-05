@@ -11,4 +11,22 @@ spl_autoload_register(function ($classname)
 	}
 });
 
-require './controllers/index.php';
+if(isset($_GET['page']))
+{
+	switch($_GET['page'])
+	{
+		case 'login':
+			require './controllers/login.php';
+			break;
+		case 'register':
+			require './controllers/register.php';
+			break;
+		default:
+			require './controllers/index.php';
+			break;
+	}
+}
+else 
+{
+	require './controllers/index.php';
+}
