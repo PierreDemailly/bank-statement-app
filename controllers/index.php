@@ -17,7 +17,11 @@ if(isset($_POST['new']))
   {
     if(!$account_manager->accountExist($_POST['name']))
     {
-      $account_manager->createAccount($_POST['name']);
+      if($_POST['name'] === 'Compte courant')
+        $account_manager->createAccount($_POST['name'], 80, $_SESSION['id']);
+      else 
+        $account_manager->createAccount($_POST['name'], 0, $_SESSION['id']);
+
     }
   }
 }
@@ -43,6 +47,6 @@ if(isset($_POST['delete']))
   $account_manager->deleteAccount($_POST['id']);
 }
 
-$accounts = $account_manager->getAccount();
+$accounts = $account_manager->getAccount($_SESSION['id']);
 
 include "./views/indexView.php";
