@@ -17,6 +17,9 @@ if(isset($_GET['page']))
 {
 	switch($_GET['page'])
 	{
+		case 'me':
+			require './controllers/index.php';
+			break;
 		case 'login':
 			require './controllers/login.php';
 			break;
