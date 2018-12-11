@@ -42,6 +42,7 @@ include('includes/header.php');
 
 					<p>Somme disponible : <?= $account->getBalance() ?> €</p>
 
+<?php if($account->getName() !== 'PEL'): ?>
 					<!-- Formulaire pour dépot/retrait -->
 					<h4>Dépot / Retrait</h4>
 					<form method="post">
@@ -69,7 +70,7 @@ include('includes/header.php');
 						</select>
 						<input type="submit" name="transfer" value="Transférer l'argent">
 					</form>
-
+<?php endif; ?>
 					<!-- Formulaire pour suppression -->
 			 		<form class="delete" method="post">
 				 		<input type="hidden" name="id" value="<?= $account->getId() ?>"  required>
