@@ -45,5 +45,4 @@ if (isset($_POST['register']))
 
 include './views/includes/header.php';
 include './views/registerView.php';
-var_dump($errors);
 include './views/includes/footer.php';
