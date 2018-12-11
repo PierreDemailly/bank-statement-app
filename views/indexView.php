@@ -11,6 +11,7 @@ include('includes/header.php');
 	</header>
 
 	<h1>Mon application bancaire</h1>
+	<h2>Content de vous revoir, <?= $user->getFirstname() . $user->getLastname() ?></h2>
 
 	<form class="newAccount" action="./" method="post">
 		<label>Sélectionner un type de compte</label>
