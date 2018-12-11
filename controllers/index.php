@@ -1,9 +1,18 @@
 <?php
+if(!isset($_SESSION['id']))
+{
+  header('Location: ./login');
+}
+else 
+{
+  $user_manager = new UserManager();
+  $user = $user_manager->getUser($_SESSION['id']);
+}
+
 $account_manager = new AccountManager();
 
 if(isset($_POST['new']))
 {
-
   if(in_array($_POST['name'], Account::TYPE_LIST))
   {
     if(!$account_manager->accountExist($_POST['name']))
