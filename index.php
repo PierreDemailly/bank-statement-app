@@ -26,6 +26,9 @@ if(isset($_GET['page']))
 		case 'register':
 			require './controllers/register.php';
 			break;
+		case 'logout':
+			require './controllers/logout.php';
+			break;
 		default:
 			require './controllers/index.php';
 			break;

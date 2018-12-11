@@ -15,13 +15,12 @@ if(isset($_POST['new']))
 {
   if(in_array($_POST['name'], Account::TYPE_LIST))
   {
-    if(!$account_manager->accountExist($_POST['name']))
+    if(!$account_manager->accountExist($_POST['name'], $_SESSION['id']))
     {
       if($_POST['name'] === 'Compte courant')
         $account_manager->createAccount($_POST['name'], 80, $_SESSION['id']);
       else 
         $account_manager->createAccount($_POST['name'], 0, $_SESSION['id']);
-
     }
   }
 }
