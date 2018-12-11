@@ -21,10 +21,12 @@ class AccountManager
    * @param string $name
    * @return void
    */
-  public function createAccount($name)
+  public function createAccount($name, $balance, $id)
   {
-    $stmt = $this->database->prepare('INSERT INTO accounts (name) VALUES (:name)');
+    $stmt = $this->database->prepare('INSERT INTO accounts (name, user_id, balance) VALUES (:name, :user_id, :balance)');
     $stmt->bindValue('name', $name, PDO::PARAM_STR);
+    $stmt->bindValue('user_id', $id, PDO::PARAM_INT);
+    $stmt->bindValue('balance', $balance, PDO::PARAM_INT);
     $stmt->execute();
   }
 
@@ -33,10 +35,11 @@ class AccountManager
    * @param string $name
    * @return void
    */
-  public function accountExist($name)
+  public function accountExist($name, $id)
   {
-    $stmt = $this->database->prepare('SELECT COUNT(id) as count FROM accounts WHERE name = :name');
+    $stmt = $this->database->prepare('SELECT COUNT(id) as count FROM accounts WHERE name = :name AND user_id = :user_id');
     $stmt->bindValue('name', $name, PDO::PARAM_STR);
+    $stmt->bindValue('user_id', $id, PDO::PARAM_INT);
     $stmt->execute();
     return ($stmt->fetch()->count > 0);
   }
@@ -46,24 +49,16 @@ class AccountManager
    * @param integer $id
    * @return void
    */
-  public function getAccount($id = null)
+  public function getAccount($id)
   {
-    if($id !== null)
+    $stmt = $this->database->prepare('SELECT id, name, balance FROM accounts WHERE user_id = :id');
+    $stmt->bindValue('id', $id, PDO::PARAM_INT);
+    $stmt->execute();
+    foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $account)
     {
-        $stmt = $this->database->prepare('SELECT id, name, balance FROM accounts WHERE id = :id');
-        $stmt->bindValue('id', $id, PDO::PARAM_INT);
-        $stmt->execute(PDO::FETCH_ASSOC);
-        return new Account($stmt->fetch());
+      $accounts[] = new Account($account);
     }
-    else 
-    {
-      $stmt = $this->database->query('SELECT id, name, balance FROM accounts');
-      foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $account)
-      {
-        $accounts[] = new Account($account);
-      }
-      return $accounts ?? null;
-    }
+    return $accounts ?? [];
   }
 
   /**
