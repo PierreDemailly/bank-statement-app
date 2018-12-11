@@ -1,25 +1,31 @@
 <?php
+declare(strict_types = 1);
+
 /**
- * Class to connect to the data base
+ * Class to connect to the database
  */
 class Database
 {
-
 	const HOST = "localhost",
-		  DBNAME = "", // nom de votre base de données
-		  LOGIN = "", // votre utilisateur
-		  PWD = ""; // votre mot de passe
+				BASE = "bank",
+				USER = "root",
+				PASS = "root";
 
-	static public function DB(){
+	/**
+	 * Get the instance of PDO
+	 * @return PDO
+	 */
+	static public function getInstance(){
 		try
 		{
-			$db = new PDO("mysql:host=" . self::HOST .";dbname=" . self::DBNAME , self::LOGIN, self::PWD);
+			$db = new PDO("mysql:host=" . self::HOST .";dbname=" . self::BASE, self::USER, self::PASS);
+			$db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			return $db;
 		}
-		catch (Exception $e)
+		catch (PDOException $e)
 		{
 			die('Erreur : ' . $e->getMessage());
 		}
 	}
-
 }

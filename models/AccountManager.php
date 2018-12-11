@@ -89,6 +89,11 @@ class AccountManager
     $stmt->execute();
   }
 
+  /**
+   * Delete an account
+   * @param int $id
+   * @return void
+   */
   public function deleteAccount($id)
   {
     $stmt = $this->database->query('DELETE FROM accounts WHERE id = '. $id);

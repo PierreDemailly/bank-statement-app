@@ -32,6 +32,13 @@ class UserManager
     $stmt->execute();
   }
 
+  /**
+   * Get a user with id
+   * - int = search by id
+   * - string = search by name
+   * @param string|int $id
+   * @return void
+   */
   public function getUser($id)
   {
     if(ctype_digit($id))
@@ -48,6 +55,11 @@ class UserManager
     return new User($stmt->fetch(PDO::FETCH_ASSOC));
   }
 
+  /**
+   * check if email already exist
+   * @param string $email
+   * @return int
+   */
   public function registeredEmail($email)
   {
     $stmt = $this->database->prepare('SELECT COUNT(id) as count FROM users WHERE email = :email');
@@ -56,6 +68,13 @@ class UserManager
     return $stmt->fetch()->count;
   }
 
+  /**
+   * Check password
+   *
+   * @param string $email
+   * @param string $pass
+   * @return boolean
+   */
   public function checkPassword($email, $pass)
   {
     $stmt = $this->database->prepare('SELECT * FROM users WHERE email = :email');
